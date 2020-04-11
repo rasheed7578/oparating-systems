@@ -1,0 +1,37 @@
+#include<stdio.h>
+#include<sys/types.h>
+#include<unistd.h>
+int main()
+{
+int n,i1,i2;
+pid_t pid;
+printf("Enter the number of a sequence:\n");
+scanf("%d",&i2);
+if(i2<0)
+{
+printf("please enter a non negative number:\n");
+}
+else
+{
+pid=fork();
+if(pid==0)
+{
+printf("child is producing a sequence....\n");
+printf("%d",i2);
+while(i2<0)
+{
+n=i2/2;
+printf("%d",n);
+n=i2;
+}
+printf("child terminated\n");
+}
+else
+{
+printf("parent is waiting for child to complete...\n");
+wait(NULL);
+printf("parent terminated\n");
+}
+}
+return 0;
+}
